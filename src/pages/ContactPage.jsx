@@ -110,7 +110,7 @@ export default function ContactPage() {
             { icon: Phone, title: 'Phone', lines: ['+91 8766476895', '+91 8766476895'] },
             { icon: Mail, title: 'Email', lines: ['info@vyronexMotors.com', 'chinmaychaudhari312@gmail.com'] },
             { icon: MapPin, title: 'Address', lines: ['Pune, Maharashtra', 'India'] },
-            { icon: ({className}) => <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, title: 'Business Hours', lines: ['Mon - Fri: 9:00 AM - 8:00 PM', 'Sat - Sun: 10:00 AM - 6:00 PM'] }
+            { icon: ({className}) => <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, title: 'Business Hours', lines: ['Mon - Fri: 10:00 AM - 9:00 PM', 'Sat - Sun: 11:00 AM - 7:00 PM'] }
           ].map((item, index) => (
             <AnimatedReveal key={index} delay={index * 0.1}>
               <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group h-full">

@@ -149,7 +149,7 @@ export default function SplashScreen({ onComplete }) {
         setTimeout(() => clearInterval(fade), 600);
     }, 2500));
 
-    timers.push(setTimeout(() => init('DEFINING PRECISION', 'text', 'center'), 2900));
+    timers.push(setTimeout(() => init('LAUNCHES', 'text', 'center'), 2900));
     timers.push(setTimeout(() => {
         let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
         setTimeout(() => clearInterval(fade), 600);
