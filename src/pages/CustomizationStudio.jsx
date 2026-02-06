@@ -72,8 +72,16 @@ const Footer = () => (
         </ul>
       </div>
     </div>
-    <div className="max-w-[120rem] mx-auto mt-16 pt-8 border-t border-white/5 text-center text-xs text-gray-600 uppercase tracking-widest">
-      © 2025 VyronexMotors. All rights reserved.
+    <div className="max-w-[120rem] mx-auto mt-16 pt-8 border-t border-white/5 text-center">
+      <p className="text-sm font-heading font-bold tracking-widest text-gray-400">
+        © 2025 VyronexMotors. All rights reserved. Crafted for luxury.
+      </p>
+      {/* Signature line with Heartbeat animation */}
+      <div className="text-sm font-heading font-bold tracking-widest text-gray-400">
+        MADE WITH 
+        <span className="heartbeat-emoji inline-block mx-2 text-primary">❤️</span> 
+        BY CHINMAY CHAUDHARI
+      </div>
     </div>
   </footer>
 );
@@ -85,7 +93,6 @@ const STUDIOS = [
     title: "THE WHITE STUDIO",
     subtitle: "Pristine. Clinical. Perfection.",
     description: "An ultra-clean environment designed for paint protection film (PPF), ceramic coating, and detailed inspections under high-intensity lighting.",
-    // UPDATED: Using your local studio-gg.jpg
     image: whiteStudioImg,
     lightColor: 'rgba(255, 240, 200, 0.4)' 
   },
@@ -94,7 +101,6 @@ const STUDIOS = [
     title: "THE BLACK STUDIO",
     subtitle: "Dramatic. Bold. Exclusive.",
     description: "A moody, atmospheric space for vehicle wraps, custom bodywork, and unveiling your newly transformed machine.",
-    // UPDATED: Using your local Motors-crr.jpg
     image: blackStudioImg,
     lightColor: 'rgba(255, 215, 0, 0.2)'
   }
@@ -146,14 +152,11 @@ export default function CustomizationStudio() {
                   alt={studio.title} 
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                {/* Golden White Light overlay */}
                 <div 
                     className="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-50 group-hover:opacity-80 transition-opacity duration-500"
                     style={{ background: `radial-gradient(circle at center, ${studio.lightColor}, transparent 70%)` }}
                 />
-                {/* Dark Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20 opacity-90" />
-                {/* Content */}
                 <div className="absolute inset-0 p-10 flex flex-col justify-between z-10">
                     <div className="text-center">
                         <h4 

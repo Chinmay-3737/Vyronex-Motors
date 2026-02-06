@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 
 // --- IMPORTS FOR LOCAL IMAGES ---
-// 1. Monster Truck Image
 import mafiaTruckImg from '../assets/mafia-truck.jpg';
-// 2. 4x4 Car Image (Make sure this file exists in src/assets/)
 import fourByFourImg from '../assets/4x4-car.jpg';
 
 // --- Utility Components ---
@@ -52,7 +50,7 @@ const Header = () => (
   </nav>
 );
 
-// --- Footer Component ---
+// --- Footer Component (UPDATED) ---
 const Footer = () => (
   <footer className="bg-black py-16 px-6 border-t border-white/10 text-white font-paragraph relative z-10">
     <div className="max-w-[120rem] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -94,8 +92,19 @@ const Footer = () => (
         </div>
       </div>
     </div>
-    <div className="max-w-[120rem] mx-auto mt-16 pt-8 border-t border-white/5 text-center text-xs text-gray-600 uppercase tracking-widest">
-      © 2025 VyronexMotors. All rights reserved. Crafted for luxury.
+
+    {/* Copyright and Signature Section */}
+    <div className="max-w-[120rem] mx-auto mt-16 pt-8 border-t border-white/5 text-center flex flex-col items-center gap-4">
+      <p className="text-sm font-heading font-bold tracking-widest text-gray-400">
+        © 2025 VyronexMotors. All rights reserved. Crafted for luxury.
+      </p>
+      
+      {/* Signature line with Heartbeat animation */}
+      <div className="text-sm font-heading font-bold tracking-widest text-gray-400">
+        MADE WITH 
+        <span className="heartbeat-emoji inline-block mx-2 text-primary">❤️</span> 
+        BY CHINMAY CHAUDHARI
+      </div>
     </div>
   </footer>
 );
@@ -106,7 +115,6 @@ const CATEGORIES = [
     id: 'monster-trucks',
     title: 'Monster Trucks',
     description: 'Experience the raw power and commanding presence of our Monster Truck collection.',
-    // Uses local image: mafia-truck.jpg
     image: mafiaTruckImg, 
     color: 'text-primary'
   },
@@ -135,7 +143,6 @@ const CATEGORIES = [
     id: '4x4-vehicles',
     title: '4x4 Vehicles',
     description: 'Robust and capable off-road vehicles, offering versatility, power, and luxury.',
-    // Uses local image: 4x4-car.jpg
     image: fourByFourImg, 
     color: 'text-white'
   }
@@ -161,9 +168,7 @@ export default function CarSales() {
         style={{ scaleX }}
       />
 
-      {/* --- Page Title Section --- */}
       <section className="pt-40 pb-20 px-6 text-center relative overflow-hidden">
-        {/* Background Grids */}
         <div className="absolute inset-0 grid-bg opacity-10 pointer-events-none" />
         
         <AnimatedReveal>
@@ -176,43 +181,29 @@ export default function CarSales() {
         </AnimatedReveal>
       </section>
 
-      {/* --- Categories Grid --- */}
       <section className="px-6 pb-32">
         <div className="max-w-[120rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {CATEGORIES.map((category, index) => (
             <AnimatedReveal key={category.id} delay={index * 0.1}>
               <Link to={`/categories/${category.id}`} className="block group">
                 <div className="relative h-[500px] w-full rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/50 transition-colors duration-500">
-                  
-                  {/* Background Image */}
                   <img 
                     src={category.image} 
                     alt={category.title} 
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  
-                  {/* Dark Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 transition-opacity duration-500" />
-                  
-                  {/* Content Positioned at Bottom */}
                   <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full">
-                    
-                    {/* Title */}
                     <h3 className={`text-4xl font-heading font-bold mb-4 ${category.id === 'monster-trucks' ? 'text-primary' : 'text-white'} group-hover:text-primary transition-colors duration-300`}>
                       {category.title}
                     </h3>
-                    
-                    {/* Description */}
                     <p className="text-gray-300 text-sm leading-relaxed mb-6 opacity-80 max-w-sm">
                       {category.description}
                     </p>
-                    
-                    {/* Link Arrow */}
                     <div className="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
                       View Collection <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
-
                 </div>
               </Link>
             </AnimatedReveal>

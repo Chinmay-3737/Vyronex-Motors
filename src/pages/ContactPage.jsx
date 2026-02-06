@@ -75,8 +75,16 @@ const Footer = () => (
         </div>
       </div>
     </div>
-    <div className="max-w-[120rem] mx-auto mt-16 pt-8 border-t border-white/5 text-center text-xs text-gray-600 uppercase tracking-widest">
-      © 2025 VyronexMotors. All rights reserved. Crafted for luxury.
+    <div className="max-w-[120rem] mx-auto mt-16 pt-8 border-t border-white/5 text-center">
+      <p className="text-sm font-heading font-bold tracking-widest text-gray-400">
+        © 2025 VyronexMotors. All rights reserved. Crafted for luxury.
+      </p>
+      {/* Signature line with Heartbeat animation */}
+      <div className="text-sm font-heading font-bold tracking-widest text-gray-400">
+        MADE WITH 
+        <span className="heartbeat-emoji inline-block mx-2 text-primary">❤️</span> 
+        BY CHINMAY CHAUDHARI
+      </div>
     </div>
   </footer>
 );
