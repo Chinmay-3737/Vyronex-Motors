@@ -77,6 +77,7 @@ const Footer = () => (
         © 2025 VyronexMotors. All rights reserved. Crafted for luxury.
       </p>
       
+
       {/* Signature line with Heartbeat animation */}
       <div className="text-sm font-heading font-bold tracking-widest text-gray-400">
         MADE WITH 
