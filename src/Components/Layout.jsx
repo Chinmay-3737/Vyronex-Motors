@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from './Navbar';
 
 export default function Layout({ children }) {
@@ -5,17 +6,17 @@ export default function Layout({ children }) {
     <div className="bg-black text-white min-h-screen flex flex-col">
       <Navbar />
       
-      {/* This ensures your content grows to push the footer down */}
-      <main className="flex-grow">
+      {/* Added pt-20 to account for fixed navbar on mobile */}
+      <main className="flex-grow pt-20 md:pt-0">
         {children}
       </main>
 
-      <footer className="footer-credit">
-        <p>
+      <footer className="py-8 border-t border-white/5 bg-black">
+        <div className="text-center text-[10px] md:text-sm font-heading font-bold tracking-widest text-gray-500 uppercase">
           Made With 
-          <span className="heartbeat-emoji">❤️</span> 
+          <span className="heartbeat-emoji inline-block mx-2 text-primary">❤️</span> 
           By Chinmay Chaudhari
-        </p>
+        </div>
       </footer>
     </div>
   );

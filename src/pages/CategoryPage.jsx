@@ -12,6 +12,7 @@ import defenderImg from '../assets/Vyronex-car.jpg';
 import jeepImg from '../assets/jeep-off.jpg';
 import hummerImg from '../assets/Hummer-ev.jpg';
 import raptorImg from '../assets/gmc-ca.jpg'; // User requested this for the Raptor card
+import gWagonImg from '../assets/G wagon.jpg';
 
 // --- DATA: All Cars with Updated Local Images ---
 const CAR_DATABASE = {
@@ -127,6 +128,16 @@ const CAR_DATABASE = {
         specs: { hp: "470 HP", speed: "99 mph" },
         image: jeepImg // UPDATED
       },
+
+      {
+        id: 'G Wagon',
+        name: "G-Class G 63 AMG",
+        year: "2025",
+        price: "$115,000",
+        specs: { hp: "577 HP", speed: "149 mph" },
+        image: gWagonImg
+      },
+
       {
         id: 'raptor',
         name: "Ford F-150 Raptor R",
