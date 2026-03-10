@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, Camera, Layers, PenTool } from 'lucide-react';
+import Layout from '../Components/Layout';
 
 // --- IMPORT LOCAL STUDIO HERO IMAGES ---
 import blackStudioHero from '../assets/Motors-crr.jpg';
@@ -90,8 +91,7 @@ export default function Studio() {
   useEffect(() => window.scrollTo(0, 0), [type]);
 
   return (
-    <div className="min-h-screen bg-black text-white font-paragraph selection:bg-primary selection:text-white overflow-x-hidden">
-      <Header />
+    <Layout>
       {/* Scroll Progress Bar */}
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50" style={{ scaleX }} />
 
@@ -145,7 +145,7 @@ export default function Studio() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {content.gallery.map((img, index) => (
                     <AnimatedReveal key={index} delay={index * 0.1}>
-                        <div className="group relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-black">
+                        <div className="group relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-black luxury-hover">
                             <img 
                                 src={img.src} 
                                 alt={img.label} 
@@ -171,11 +171,11 @@ export default function Studio() {
 
       {/* --- BACK NAVIGATION --- */}
       <section className="py-20 text-center bg-black border-t border-white/10">
-          <Link to="/customization" className="inline-flex items-center gap-3 text-white hover:text-primary transition-colors text-lg font-bold uppercase tracking-widest">
+          <Link to="/customization" className="inline-flex items-center gap-3 text-white hover:text-primary transition-colors text-lg font-bold uppercase tracking-widest luxury-hover">
             <ArrowLeft className="w-5 h-5" /> Return to Studio Selection
           </Link>
       </section>
 
-    </div>
+    </Layout>
   );
 }

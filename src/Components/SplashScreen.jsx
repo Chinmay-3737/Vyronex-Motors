@@ -7,6 +7,72 @@ export default function SplashScreen({ onComplete }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+                    // --- Red grid of squares effect ---
+                    const gridSpacing = 48;
+                    function drawRedGrid(ctx, width, height) {
+                      ctx.save();
+                      ctx.lineWidth = 1;
+                      ctx.strokeStyle = 'rgba(255,0,0,0.13)';
+                      // Vertical lines
+                      for (let x = 0; x < width; x += gridSpacing) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, height);
+                        ctx.stroke();
+                      }
+                      // Horizontal lines
+                      for (let y = 0; y < height; y += gridSpacing) {
+                        ctx.beginPath();
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(width, y);
+                        ctx.stroke();
+                      }
+                      ctx.restore();
+                    }
+
+                    // Glowing red background particles
+                    const backgroundDotCount = 48;
+                    let backgroundDots = [];
+                    function initBackgroundDots(width, height) {
+                      backgroundDots = [];
+                      for (let i = 0; i < backgroundDotCount; i++) {
+                        backgroundDots.push({
+                          x: Math.random() * width,
+                          y: Math.random() * height,
+                          r: 1.2 + Math.random() * 2.2,
+                          alpha: 0.18 + Math.random() * 0.22
+                        });
+                      }
+                    }
+                    function drawBackgroundDots(ctx) {
+                      for (let dot of backgroundDots) {
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
+                        ctx.shadowColor = 'rgba(255,0,0,0.7)';
+                        ctx.shadowBlur = 8;
+                        ctx.fillStyle = `rgba(255,0,0,${dot.alpha})`;
+                        ctx.fill();
+                        ctx.restore();
+                      }
+                    }
+                // --- Red grid-dot background effect ---
+                function drawRedGridDots(ctx, width, height) {
+                  const gridSpacing = 48; // space between dots
+                  const dotRadius = 1.6;
+                  for (let x = 0; x < width; x += gridSpacing) {
+                    for (let y = 0; y < height; y += gridSpacing) {
+                      ctx.save();
+                      ctx.beginPath();
+                      ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                      ctx.shadowColor = 'rgba(255,0,0,0.7)';
+                      ctx.shadowBlur = 8;
+                      ctx.fillStyle = 'rgba(255,0,0,0.7)';
+                      ctx.fill();
+                      ctx.restore();
+                    }
+                  }
+                }
             // Mouse move handler for mesh interaction
             function handleMeshMouseMove(e) {
               meshRef.current.mouse.x = e.clientX;
@@ -55,37 +121,8 @@ export default function SplashScreen({ onComplete }) {
             if (pt.x < 0 || pt.x > ctx.canvas.width) pt.vx *= -1;
             if (pt.y < 0 || pt.y > ctx.canvas.height) pt.vy *= -1;
           }
-          // Draw lines
-          for (let i = 0; i < mesh.points.length; i++) {
-            for (let j = i + 1; j < mesh.points.length; j++) {
-              const dx = mesh.points[i].x - mesh.points[j].x;
-              const dy = mesh.points[i].y - mesh.points[j].y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < 160) {
-                ctx.beginPath();
-                ctx.moveTo(mesh.points[i].x, mesh.points[i].y);
-                ctx.lineTo(mesh.points[j].x, mesh.points[j].y);
-                ctx.strokeStyle = `rgba(${mesh.points[i].color},0.18)`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-              }
-            }
-          }
-          // Draw points
-          for (let pt of mesh.points) {
-            ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
-            ctx.fillStyle = `rgb(${pt.color})`;
-            ctx.fill();
-            // Optionally: draw some circles
-            if (Math.random() < 0.01) {
-              ctx.beginPath();
-              ctx.arc(pt.x, pt.y, 12 + Math.random() * 10, 0, Math.PI * 2);
-              ctx.strokeStyle = `rgba(${pt.color},0.08)`;
-              ctx.lineWidth = 1.2;
-              ctx.stroke();
-            }
-          }
+          // (Removed mesh lines: do not draw lines between mesh points)
+          // (Removed mesh dots: do not draw circles at mesh points)
         }
       initMesh();
     // Burst effect: create a burst of particles at the center
@@ -136,6 +173,8 @@ export default function SplashScreen({ onComplete }) {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    initBackgroundDots(canvas.width, canvas.height);
+
 
     let particleArray = [];
     const mouse = { x: null, y: null, radius: 100 };
@@ -265,7 +304,11 @@ export default function SplashScreen({ onComplete }) {
     function animate() {
       // Clear the canvas every frame to avoid ghosting
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Draw mesh background
+      // Draw red grid background (full screen)
+      drawRedGrid(ctx, canvas.width, canvas.height);
+      // Draw glowing red background dots
+      drawBackgroundDots(ctx);
+      // Draw mesh background (no lines/dots if removed)
       animateMesh(ctx);
       // Draw main particles/text
       for (let i = 0; i < particleArray.length; i++) {
@@ -274,36 +317,41 @@ export default function SplashScreen({ onComplete }) {
       }
       animationId = requestAnimationFrame(animate);
       // Re-init mesh on resize
-      window.addEventListener('resize', initMesh);
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initBackgroundDots(canvas.width, canvas.height);
+        initMesh();
+      });
     }
     animate();
 
-    timers.push(setTimeout(() => init('CHINMAY', 'text', 'random'), 500));
-    timers.push(setTimeout(() => {
-        let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
-        setTimeout(() => clearInterval(fade), 600);
-    }, 2500));
 
-    timers.push(setTimeout(() => init('LAUNCHES', 'text', 'center'), 2900));
+    // Slightly slower splash sequence (~4.5 seconds total)
+    timers.push(setTimeout(() => init('CHINMAY', 'text', 'random'), 200));
     timers.push(setTimeout(() => {
-        let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
-        setTimeout(() => clearInterval(fade), 600);
-    }, 5800));
+      let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
+      setTimeout(() => clearInterval(fade), 400);
+    }, 1300));
 
-    timers.push(setTimeout(() => init(null, 'logo', 'random'), 6600));
+    timers.push(setTimeout(() => init('LAUNCHES', 'text', 'center'), 1700));
     timers.push(setTimeout(() => {
-        let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
-        setTimeout(() => clearInterval(fade), 1000);
-    }, 10000));
+      let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
+      setTimeout(() => clearInterval(fade), 400);
+    }, 2800));
 
-    timers.push(setTimeout(() => { if (onComplete) onComplete(); }, 11000));
+    timers.push(setTimeout(() => init(null, 'logo', 'random'), 3200));
+    timers.push(setTimeout(() => {
+      let fade = setInterval(() => particleArray.forEach(p => p.fadeOut()), 20);
+      setTimeout(() => clearInterval(fade), 500);
+    }, 4000));
+
+    timers.push(setTimeout(() => { if (onComplete) onComplete(); }, 4500));
 
     return () => {
-          window.removeEventListener('mousemove', handleMeshMouseMove);
-        window.removeEventListener('resize', initMesh);
+      window.removeEventListener('mousemove', handleMeshMouseMove);
+      window.removeEventListener('resize', initMesh);
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
       timers.forEach(timer => clearTimeout(timer));
     };
   }, [onComplete]);

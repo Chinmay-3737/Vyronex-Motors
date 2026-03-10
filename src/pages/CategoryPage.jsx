@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Filter } from 'lucide-react';
+import Layout from '../Components/Layout';
 
 // --- 1. IMPORT LOCAL IMAGES ---
 // Note: Case sensitivity matters! I used the capitalization from your screenshot.
@@ -177,9 +178,7 @@ export default function CategoryPage() {
   if (!data) return <div className="text-white text-center pt-40">Category Not Found</div>;
 
   return (
-    <div className="min-h-screen bg-black text-white font-paragraph selection:bg-primary selection:text-white">
-      <Header />
-
+    <Layout>
       <div className="pt-32 px-6 max-w-[120rem] mx-auto pb-20">
         
         {/* Breadcrumb & Header */}
@@ -260,7 +259,7 @@ export default function CategoryPage() {
                     <span className="block text-[10px] text-gray-500 uppercase tracking-wider mb-1">Starting at</span>
                     <span className="text-2xl font-heading font-bold text-primary">{car.price}</span>
                   </div>
-                  <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:text-primary transition-colors">
+                  <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:text-primary transition-colors luxury-hover">
                     View Details <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -270,6 +269,6 @@ export default function CategoryPage() {
         </div>
 
       </div>
-    </div>
+    </Layout>
   );
 }
