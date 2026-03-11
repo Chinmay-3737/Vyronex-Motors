@@ -6,6 +6,8 @@ import {
   Shield, Car, Droplets, Layers, Hammer, 
   Phone, Mail, MapPin, Facebook, Instagram, Twitter 
 } from 'lucide-react';
+import LogoTicker from '../Components/LogoTicker';
+import CategoryTicker from '../Components/CategoryTicker';
 
 const AnimatedReveal = ({ children, className, delay = 0 }) => {
   const ref = useRef(null);
@@ -161,16 +163,9 @@ export default function HomePage() {
           <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent" />
         </div>
       </section>
-      <div className="w-full bg-primary/10 border-y border-primary/20 overflow-hidden py-4 backdrop-blur-sm">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[...Array(10)].map((_, i) => (
-            <span key={i} className="mx-8 text-lg font-heading font-bold text-primary/80 uppercase tracking-widest flex items-center gap-4">
-              VIP Cars <span className="w-2 h-2 bg-white rounded-full" /> 
-              Monster Trucks <span className="w-2 h-2 bg-white rounded-full" /> 
-              Custom Builds <span className="w-2 h-2 bg-white rounded-full" />
-            </span>
-          ))}
-        </div>
+      <div className="relative z-20">
+        <LogoTicker />
+        <CategoryTicker />
       </div>
       <section className="relative py-32 px-6 bg-black">
         <div className="max-w-[120rem] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
